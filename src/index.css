@@ -1,0 +1,129 @@
+/* ==========================================================================
+   NeonScreen — базовые стили
+   Всё оформление строится на переменных ниже. Хардкодить цвета в компонентах
+   нельзя: захочешь поменять оттенок — придётся бегать по всем файлам.
+   ========================================================================== */
+
+:root {
+  /* Поверхности: от самой тёмной к светлой */
+  --bg: #0a0a0f;
+  --surface: #12121c;
+  --surface-hover: #1a1a28;
+
+  /* Акценты */
+  --neon: #00f0ff;
+  --neon-dim: rgba(0, 240, 255, 0.25);
+  --magenta: #ff2e97;
+  --lime: #b6ff3c;
+
+  /* Текст */
+  --text: #e6e6f0;
+  --text-muted: #9a9ab0;
+
+  /* Шрифты */
+  --font-display: "Chakra Petch", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+
+  /* Отступы: единая шкала, кратная 4 */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 32px;
+  --space-6: 48px;
+  --space-7: 64px;
+
+  --radius: 10px;
+  --max-width: 1200px;
+}
+
+/* Сброс: убираем разнобой между браузерами */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  /* Плавная прокрутка, но только если человек не отключил анимации в системе */
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+
+  /* Еле заметная сетка на фоне — даёт глубину, не мешая читать */
+  background-image:
+    linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.5px;
+}
+
+a {
+  color: var(--neon);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--magenta);
+}
+
+/* Видимый фокус обязателен: без него с клавиатуры пользоваться невозможно */
+:focus-visible {
+  outline: 2px solid var(--neon);
+  outline-offset: 3px;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+/* Общий контейнер: ограничивает ширину и держит поля на мобилках */
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-3);
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding: 0 var(--space-4);
+  }
+}
