@@ -232,7 +232,7 @@ function drawRadar(ctx, profile) {
   // На двух осях многоугольник вырождается в отрезок
   if (genres.length < 3) return;
 
-  const radius = 112;
+  const radius = 96;
   const maxCount = Math.max(...genres.map(([, count]) => count));
   const step = (Math.PI * 2) / genres.length;
 
@@ -240,7 +240,7 @@ function drawRadar(ctx, profile) {
   const angleOf = (index) => -Math.PI / 2 + index * step;
 
   ctx.save();
-  ctx.translate(272, 1120);
+  ctx.translate(232, 1120);
 
   ctx.strokeStyle = "rgba(0, 240, 255, 0.18)";
   ctx.lineWidth = 1;
@@ -287,13 +287,13 @@ function drawRadar(ctx, profile) {
   ctx.stroke();
   ctx.shadowBlur = 0;
 
-  ctx.font = "500 17px Inter, sans-serif";
+  ctx.font = "500 15px Inter, sans-serif";
   ctx.fillStyle = MUTED;
   ctx.textBaseline = "middle";
 
   genres.forEach(([id], index) => {
-    const x = Math.cos(angleOf(index)) * (radius + 26);
-    const y = Math.sin(angleOf(index)) * (radius + 26);
+    const x = Math.cos(angleOf(index)) * (radius + 22);
+    const y = Math.sin(angleOf(index)) * (radius + 22);
 
     // Подпись слева от центра прижимается вправо и наоборот,
     // иначе длинные слова залезают на фигуру
@@ -326,34 +326,38 @@ function drawStats(ctx, profile) {
   ctx.textBaseline = "alphabetic";
 
   cells.forEach(([label, value, color], index) => {
-    const x = 480 + (index % 2) * 285;
+    const x = 470 + (index % 2) * 290;
     const y = 1078 + Math.floor(index / 2) * 96;
 
     ctx.font = "500 17px Inter, sans-serif";
     ctx.fillStyle = MUTED;
     ctx.fillText(label, x, y);
 
-    ctx.font = "700 40px 'Chakra Petch', sans-serif";
+    // Вместо обрезки хвоста подбираем такой кегль, при котором
+    // значение целиком влезает в колонку. «Приключения» и «2017–2026»
+    // просто станут чуть мельче, чем «8»
     ctx.fillStyle = color;
-    glow(ctx, color, 16, () =>
-      ctx.fillText(fitText(ctx, value, 260), x, y + 46),
-    );
+    const size = fitFontSize(ctx, value, 270, 40, 24);
+    ctx.font = `700 ${size}px 'Chakra Petch', sans-serif`;
+    glow(ctx, color, 16, () => ctx.fillText(value, x, y + 46));
   });
 }
 
 /**
- * Длинные названия жанров вроде «Документальный» не влезают в колонку.
- * Canvas сам ничего не обрезает, поэтому считаем ширину вручную
+ * Подбирает размер шрифта под ширину колонки.
+ * Canvas умеет измерять текст через measureText — уменьшаем кегль,
+ * пока строка не поместится, но не мельче нижней границы
  */
-function fitText(ctx, text, maxWidth) {
-  if (ctx.measureText(text).width <= maxWidth) return text;
+function fitFontSize(ctx, text, maxWidth, maxSize, minSize) {
+  let size = maxSize;
 
-  let result = text;
-  while (result.length > 1 && ctx.measureText(`${result}…`).width > maxWidth) {
-    result = result.slice(0, -1);
+  while (size > minSize) {
+    ctx.font = `700 ${size}px 'Chakra Petch', sans-serif`;
+    if (ctx.measureText(text).width <= maxWidth) break;
+    size -= 1;
   }
 
-  return `${result}…`;
+  return size;
 }
 
 function drawFooter(ctx) {
