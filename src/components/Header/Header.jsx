@@ -1,8 +1,8 @@
 import { NavLink } from "react-router-dom";
+import SearchBar from "../SearchBar/SearchBar.jsx";
 import styles from "./Header.module.css";
 
 function Header() {
-  // NavLink сам знает, активна ли ссылка, и отдаёт это через функцию в className
   const linkClass = ({ isActive }) =>
     isActive ? `${styles.link} ${styles.linkActive}` : styles.link;
 
@@ -12,6 +12,8 @@ function Header() {
         <NavLink to="/" className={styles.logo}>
           Neon<span className={styles.logoAccent}>Screen</span>
         </NavLink>
+
+        <SearchBar />
 
         <nav>
           <ul className={styles.nav}>

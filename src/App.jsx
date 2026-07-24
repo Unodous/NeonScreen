@@ -1,3 +1,4 @@
+import Search from "./pages/Search.jsx";
 import { Routes, Route } from "react-router-dom";
 import Header from "./components/Header/Header.jsx";
 import Home from "./pages/Home.jsx";
@@ -18,6 +19,7 @@ function App() {
         }}
       >
         <Routes>
+          <Route path="/search" element={<Search />} />
           <Route path="/" element={<Home />} />
           <Route path="/movie/:id" element={<MovieDetails />} />
           <Route path="/favorites" element={<Favorites />} />

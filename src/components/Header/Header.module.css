@@ -13,12 +13,15 @@
 .inner {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: var(--space-3);
   min-height: 64px;
+  flex-wrap: wrap;
+  padding-top: var(--space-2);
+  padding-bottom: var(--space-2);
 }
 
 .logo {
+  flex-shrink: 0;
   font-family: var(--font-display);
   font-size: 1.4rem;
   font-weight: 700;
@@ -39,6 +42,7 @@
   display: flex;
   gap: var(--space-3);
   list-style: none;
+  flex-shrink: 0;
 }
 
 .link {
@@ -72,10 +76,26 @@
   box-shadow: 0 0 8px var(--neon);
 }
 
+/* На узких экранах поиск уезжает на вторую строку во всю ширину.
+   Селектор по тегу form, потому что класс поля живёт в другом модуле
+   и его хешированное имя отсюда недоступно */
+@media (max-width: 640px) {
+  .inner {
+    justify-content: space-between;
+  }
+
+  .inner form {
+    order: 3;
+    flex-basis: 100%;
+    max-width: none;
+  }
+}
+
 @media (max-width: 480px) {
   .logo {
     font-size: 1.15rem;
   }
+
   .nav {
     gap: var(--space-2);
   }
