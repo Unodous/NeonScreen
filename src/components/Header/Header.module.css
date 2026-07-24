@@ -1,0 +1,82 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  /* Полупрозрачный фон с размытием: контент под шапкой просвечивает,
+     но текст остаётся читаемым */
+  background: rgba(10, 10, 15, 0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--neon-dim);
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  min-height: 64px;
+}
+
+.logo {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--text);
+}
+
+.logo:hover {
+  color: var(--text);
+}
+
+.logoAccent {
+  color: var(--neon);
+  text-shadow: 0 0 12px rgba(0, 240, 255, 0.6);
+}
+
+.nav {
+  display: flex;
+  gap: var(--space-3);
+  list-style: none;
+}
+
+.link {
+  display: block;
+  padding: var(--space-2) var(--space-1);
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  font-weight: 500;
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+.link:hover {
+  color: var(--text);
+}
+
+/* Подчёркивание активного пункта — рисуем псевдоэлементом,
+   чтобы не дёргать высоту строки */
+.linkActive {
+  color: var(--neon);
+}
+
+.linkActive::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: var(--neon);
+  box-shadow: 0 0 8px var(--neon);
+}
+
+@media (max-width: 480px) {
+  .logo {
+    font-size: 1.15rem;
+  }
+  .nav {
+    gap: var(--space-2);
+  }
+}

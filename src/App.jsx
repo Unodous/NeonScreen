@@ -1,20 +1,31 @@
+import { Routes, Route } from "react-router-dom";
+import Header from "./components/Header/Header.jsx";
+import Home from "./pages/Home.jsx";
+import MovieDetails from "./pages/MovieDetails.jsx";
+import Favorites from "./pages/Favorites.jsx";
+import NotFound from "./pages/NotFound.jsx";
+
 function App() {
   return (
-    <div className="container">
-      <h1
+    <>
+      <Header />
+
+      {/* main вместо div — так скринридеры понимают, где основной контент */}
+      <main
         style={{
-          fontSize: "clamp(2rem, 6vw, 3.5rem)",
-          color: "var(--neon)",
-          textShadow: "0 0 16px rgba(0, 240, 255, 0.5)",
-          paddingTop: "var(--space-7)",
+          paddingTop: "var(--space-5)",
+          paddingBottom: "var(--space-7)",
         }}
       >
-        NeonScreen
-      </h1>
-      <p style={{ color: "var(--text-muted)", marginTop: "var(--space-2)" }}>
-        Каталог фильмов на данных TMDB
-      </p>
-    </div>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/movie/:id" element={<MovieDetails />} />
+          <Route path="/favorites" element={<Favorites />} />
+          {/* Звёздочка ловит все адреса, не совпавшие с предыдущими */}
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </main>
+    </>
   );
 }
 
