@@ -1,0 +1,146 @@
+.page {
+  padding: var(--space-6) 0 var(--space-7);
+}
+
+.header {
+  margin-bottom: var(--space-5);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 5vw, 2.75rem);
+  font-weight: 700;
+  margin: 0 0 var(--space-2);
+  text-shadow: 0 0 16px rgba(0, 240, 255, 0.5);
+}
+
+.subtitle {
+  color: var(--text-muted);
+  max-width: 60ch;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.sharedNote {
+  display: inline-block;
+  margin-top: var(--space-3);
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--neon-dim);
+  border-radius: var(--radius);
+  color: var(--neon);
+  font-size: 0.875rem;
+}
+
+.layout {
+  display: grid;
+  gap: var(--space-5);
+  justify-items: center;
+}
+
+.canvasWrap {
+  width: 100%;
+  max-width: 540px;
+  border: 1px solid var(--neon-dim);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 0 40px rgba(0, 240, 255, 0.12);
+  background: var(--surface);
+}
+
+/* Canvas внутри рисуется в 1080×1350, а на экране ужимается по ширине.
+   display:block убирает лишний отступ снизу от строчного элемента */
+.canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  justify-content: center;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  /* 44px по высоте — минимальный комфортный размер для пальца */
+  min-height: 44px;
+  padding: 0 var(--space-4);
+  border: 1px solid var(--neon);
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--neon);
+  font-family: var(--font-display);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    background-color 0.2s,
+    box-shadow 0.2s;
+}
+
+.button:hover {
+  background: rgba(0, 240, 255, 0.1);
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.25);
+}
+
+.button:focus-visible {
+  outline: 2px solid var(--neon);
+  outline-offset: 3px;
+}
+
+.secondary {
+  border-color: var(--magenta);
+  color: var(--magenta);
+}
+
+.secondary:hover {
+  background: rgba(255, 46, 151, 0.1);
+  box-shadow: 0 0 20px rgba(255, 46, 151, 0.25);
+}
+
+.status {
+  min-height: 1.5rem;
+  color: var(--lime);
+  font-size: 0.875rem;
+  text-align: center;
+}
+
+.empty {
+  text-align: center;
+  padding: var(--space-6) var(--space-4);
+  border: 1px dashed var(--neon-dim);
+  border-radius: var(--radius);
+}
+
+.emptyTitle {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  margin: 0 0 var(--space-2);
+}
+
+.emptyText {
+  color: var(--text-muted);
+  margin: 0 0 var(--space-4);
+  line-height: 1.6;
+}
+
+.link {
+  color: var(--neon);
+  text-decoration: none;
+  border-bottom: 1px solid var(--neon-dim);
+}
+
+.link:hover {
+  border-bottom-color: var(--neon);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button {
+    transition: none;
+  }
+}

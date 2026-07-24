@@ -1,0 +1,105 @@
+.page {
+  padding: var(--space-6) 0 var(--space-7);
+}
+
+.head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-3);
+  margin-bottom: var(--space-5);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 4vw, 2.25rem);
+  font-weight: 700;
+  margin: 0;
+  text-shadow: 0 0 16px rgba(0, 240, 255, 0.5);
+}
+
+.count {
+  color: var(--text-muted);
+  font-size: 0.9375rem;
+}
+
+.dnaLink {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 var(--space-4);
+  border: 1px solid var(--lime);
+  border-radius: var(--radius);
+  color: var(--lime);
+  font-family: var(--font-display);
+  font-size: 0.9375rem;
+  text-decoration: none;
+  transition:
+    background-color 0.2s,
+    box-shadow 0.2s;
+}
+
+.dnaLink:hover {
+  background: rgba(182, 255, 60, 0.1);
+  box-shadow: 0 0 20px rgba(182, 255, 60, 0.25);
+}
+
+.dnaLink:focus-visible {
+  outline: 2px solid var(--lime);
+  outline-offset: 3px;
+}
+
+/* Та же сетка, что и в подборках на главной */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: var(--space-4);
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  }
+}
+
+.empty {
+  text-align: center;
+  padding: var(--space-6) var(--space-4);
+  border: 1px dashed var(--neon-dim);
+  border-radius: var(--radius);
+}
+
+.emptyTitle {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  margin: 0 0 var(--space-2);
+}
+
+.emptyText {
+  color: var(--text-muted);
+  margin: 0 0 var(--space-4);
+  line-height: 1.6;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 var(--space-4);
+  border: 1px solid var(--neon);
+  border-radius: var(--radius);
+  color: var(--neon);
+  font-family: var(--font-display);
+  text-decoration: none;
+}
+
+.button:hover {
+  background: rgba(0, 240, 255, 0.1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dnaLink {
+    transition: none;
+  }
+}

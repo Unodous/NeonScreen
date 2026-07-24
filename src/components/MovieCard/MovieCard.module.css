@@ -90,3 +90,24 @@
   font-size: 0.8rem;
   color: var(--text-muted);
 }
+.favorite {
+  position: absolute;
+  left: var(--space-2);
+  bottom: var(--space-2);
+  /* На десктопе сердце прячется, пока курсор не на карточке —
+     чтобы не мешало смотреть постеры */
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.card:hover .favorite,
+.favorite:focus-within {
+  opacity: 1;
+}
+
+/* На тач-устройствах наведения не существует, там кнопка видна всегда */
+@media (hover: none) {
+  .favorite {
+    opacity: 1;
+  }
+}

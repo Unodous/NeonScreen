@@ -61,7 +61,12 @@ export const getNowPlaying = (page = 1) =>
 export const getTopRated = (page = 1) => request("/movie/top_rated", { page });
 
 export const getMovieDetails = (id) =>
-  request(`/movie/${id}`, { append_to_response: "videos,credits,similar" });
+  request(`/movie/${id}`, {
+    append_to_response: "videos,credits,similar",
+    // Без этого TMDB вернёт ролики только на русском, а их часто нет вообще —
+    // разрешаем ещё и английские, иначе блок трейлера будет пустым у половины фильмов
+    include_video_language: "ru,en",
+  });
 
 export const searchMovies = (query, page = 1) =>
   request("/search/movie", { query, page });

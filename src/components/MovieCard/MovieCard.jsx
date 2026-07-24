@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { getPosterUrl } from "../../api/tmdb.js";
+import FavoriteButton from "../FavoriteButton/FavoriteButton.jsx";
 import styles from "./MovieCard.module.css";
 
 function MovieCard({ movie }) {
@@ -28,6 +29,12 @@ function MovieCard({ movie }) {
         ) : (
           <div className={styles.noPoster}>Нет постера</div>
         )}
+
+        {/* Кнопка лежит внутри posterWrap — позиционируется от постера,
+            а не от всей карточки */}
+        <div className={styles.favorite}>
+          <FavoriteButton movie={movie} />
+        </div>
 
         {rating && (
           <span className={`${styles.rating} ${ratingClass}`}>{rating}</span>

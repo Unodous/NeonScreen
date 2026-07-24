@@ -100,3 +100,29 @@
     gap: var(--space-2);
   }
 }
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  margin-left: 6px;
+  padding: 0 6px;
+  border-radius: 10px;
+  background: var(--magenta);
+  color: var(--bg);
+  font-size: 0.75rem;
+  font-weight: 600;
+  /* Цифры одинаковой ширины — счётчик не дёргается при смене числа */
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.dna {
+  color: var(--lime);
+}
+
+.dna:hover {
+  color: var(--lime);
+  text-shadow: 0 0 12px rgba(182, 255, 60, 0.6);
+}

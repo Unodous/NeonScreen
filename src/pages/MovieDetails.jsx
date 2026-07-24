@@ -1,6 +1,9 @@
 import { useParams, Link } from "react-router-dom";
 import { useFetch } from "../hooks/useFetch.js";
 import { getMovieDetails, getPosterUrl, getBackdropUrl } from "../api/tmdb.js";
+import Trailer from "../components/Trailer/Trailer.jsx";
+import CastList from "../components/CastList/CastList.jsx";
+import MovieSection from "../components/MovieSection/MovieSection.jsx";
 import styles from "./MovieDetails.module.css";
 
 function MovieDetails() {
@@ -92,6 +95,21 @@ function MovieDetails() {
             )}
           </div>
         </div>
+      </div>
+
+      <div className="container">
+        <Trailer videos={movie.videos?.results} />
+
+        <CastList cast={movie.credits?.cast} />
+
+        {movie.similar?.results?.length > 0 && (
+          <MovieSection
+            title="Похожие фильмы"
+            movies={movie.similar.results.slice(0, 10)}
+            loading={false}
+            error={null}
+          />
+        )}
       </div>
     </article>
   );

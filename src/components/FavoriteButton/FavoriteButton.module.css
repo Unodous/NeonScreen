@@ -1,0 +1,69 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 1px solid var(--neon-dim);
+  border-radius: 50%;
+  background: rgba(10, 10, 15, 0.75);
+  /* Размытие фона: сердце остаётся читаемым поверх любого постера */
+  backdrop-filter: blur(4px);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition:
+    color 0.2s,
+    border-color 0.2s,
+    transform 0.15s,
+    box-shadow 0.2s;
+}
+
+.button:hover {
+  color: var(--magenta);
+  border-color: var(--magenta);
+  transform: scale(1.08);
+}
+
+.button:focus-visible {
+  outline: 2px solid var(--neon);
+  outline-offset: 2px;
+}
+
+.active {
+  color: var(--magenta);
+  border-color: var(--magenta);
+  box-shadow: 0 0 16px rgba(255, 46, 151, 0.45);
+}
+
+.small {
+  width: 34px;
+  height: 34px;
+}
+
+.large {
+  /* 44px — минимальный размер, в который уверенно попадает палец */
+  width: 44px;
+  height: 44px;
+}
+
+.icon {
+  width: 58%;
+  height: 58%;
+  /* Пока не в избранном — только контур, залитое сердце появляется в .active */
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linejoin: round;
+}
+
+.active .icon {
+  fill: currentColor;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button {
+    transition: none;
+  }
+  .button:hover {
+    transform: none;
+  }
+}
