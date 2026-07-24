@@ -1,0 +1,144 @@
+.hero {
+  position: relative;
+  margin-bottom: var(--space-6);
+}
+
+/* Кадр из фильма фоном во всю ширину экрана, поверх — затемнение,
+   иначе белый текст на светлых кадрах не читается */
+.backdrop {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center 20%;
+  opacity: 0.35;
+}
+
+.backdrop::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(10, 10, 15, 0.5) 0%,
+    rgba(10, 10, 15, 0.85) 60%,
+    var(--bg) 100%
+  );
+}
+
+.heroInner {
+  position: relative;
+  display: flex;
+  gap: var(--space-5);
+  padding: var(--space-6) 0;
+  align-items: flex-start;
+}
+
+.poster {
+  width: 260px;
+  flex-shrink: 0;
+  border-radius: var(--radius);
+  border: 1px solid var(--neon-dim);
+  box-shadow: 0 0 32px rgba(0, 240, 255, 0.15);
+}
+
+.info {
+  flex: 1;
+  min-width: 0;
+}
+
+.title {
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  line-height: 1.15;
+  margin-bottom: var(--space-2);
+}
+
+.tagline {
+  color: var(--neon);
+  font-style: italic;
+  margin-bottom: var(--space-4);
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.score {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--lime);
+  padding: 4px 10px;
+  border: 1px solid rgba(182, 255, 60, 0.4);
+  border-radius: 6px;
+}
+
+.genres {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+  list-style: none;
+}
+
+.genre {
+  padding: 4px 12px;
+  border: 1px solid var(--neon-dim);
+  border-radius: 999px;
+  font-size: 0.85rem;
+  color: var(--text);
+}
+
+.overview {
+  max-width: 65ch;
+  color: var(--text);
+  line-height: 1.7;
+}
+
+.back {
+  display: inline-block;
+  margin-bottom: var(--space-4);
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.back:hover {
+  color: var(--neon);
+}
+
+.state {
+  color: var(--text-muted);
+  padding: var(--space-6) 0;
+}
+
+.error {
+  color: var(--magenta);
+  padding: var(--space-6) 0;
+}
+
+/* На телефоне постер уходит наверх и сжимается */
+@media (max-width: 720px) {
+  .heroInner {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .poster {
+    width: 180px;
+  }
+
+  .meta,
+  .genres {
+    justify-content: center;
+  }
+
+  .overview {
+    text-align: left;
+  }
+}
