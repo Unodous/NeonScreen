@@ -32,7 +32,17 @@ export function decodeProfile(encoded) {
 
     // Проверяем версию формата: если однажды поменяем структуру,
     // старые ссылки не сломают отрисовку, а просто не откроются
-    return parsed?.v === 1 ? parsed : null;
+    // Проверяем не только версию, но и форму данных: параметр приходит
+    // из адресной строки, туда можно подставить что угодно
+    const valid =
+      parsed?.v === 1 &&
+      Array.isArray(parsed.items) &&
+      Array.isArray(parsed.genres) &&
+      parsed.items.every(
+        (item) => typeof item?.c === "string" && typeof item?.r === "number",
+      );
+
+    return valid ? parsed : null;
   } catch {
     return null;
   }

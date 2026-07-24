@@ -38,13 +38,21 @@ function Dna() {
     if (!enough || !canvasRef.current) return;
 
     const canvas = canvasRef.current;
+    let cancelled = false;
 
     // Ждём загрузки шрифтов: если начать рисовать раньше,
     // canvas молча возьмёт системный шрифт и надписи поедут
     document.fonts.ready.then(() => {
-      drawDna(canvas, profile, { author: AUTHOR });
+      // Пока грузились шрифты, профиль мог смениться —
+      // тогда этот вызов уже неактуален
+      if (cancelled) return;
+      drawDna(canvas, profile, { author: sharedProfile ? "" : AUTHOR });
     });
-  }, [profile, enough]);
+
+    return () => {
+      cancelled = true;
+    };
+  }, [profile, enough, sharedProfile]);
 
   function handleDownload() {
     const canvas = canvasRef.current;
