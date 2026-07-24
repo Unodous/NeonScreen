@@ -1,0 +1,91 @@
+.card {
+  display: block;
+  color: var(--text);
+}
+
+.card:hover {
+  color: var(--text);
+}
+
+.posterWrap {
+  position: relative;
+  /* Фиксируем пропорции постера, чтобы сетка не прыгала при загрузке картинок */
+  aspect-ratio: 2 / 3;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid transparent;
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.card:hover .posterWrap,
+.card:focus-visible .posterWrap {
+  transform: translateY(-4px);
+  border-color: var(--neon);
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.25);
+}
+
+.poster {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.noPoster {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.rating {
+  position: absolute;
+  top: var(--space-2);
+  right: var(--space-2);
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 700;
+  background: rgba(10, 10, 15, 0.85);
+  backdrop-filter: blur(4px);
+}
+
+.ratingHigh {
+  color: var(--lime);
+  border: 1px solid rgba(182, 255, 60, 0.4);
+}
+
+.ratingMid {
+  color: var(--neon);
+  border: 1px solid var(--neon-dim);
+}
+
+.ratingLow {
+  color: var(--magenta);
+  border: 1px solid rgba(255, 46, 151, 0.4);
+}
+
+.title {
+  margin-top: var(--space-2);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.3;
+
+  /* Обрезаем длинные названия двумя строками, иначе сетка разъезжается */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.year {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}

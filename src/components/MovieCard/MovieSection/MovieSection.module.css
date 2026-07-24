@@ -1,0 +1,34 @@
+.section {
+  margin-bottom: var(--space-7);
+}
+
+.heading {
+  font-size: 1.5rem;
+  margin-bottom: var(--space-4);
+  padding-left: var(--space-3);
+  border-left: 3px solid var(--neon);
+  box-shadow: -3px 0 12px -4px var(--neon);
+}
+
+/* auto-fill сам решает, сколько карточек влезет в ряд —
+   отдельные брейкпойнты под каждый экран не нужны */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: var(--space-4) var(--space-3);
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  }
+}
+
+.state,
+.error {
+  color: var(--text-muted);
+}
+
+.error {
+  color: var(--magenta);
+}
